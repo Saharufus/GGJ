@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Code.Core {
@@ -25,6 +26,13 @@ namespace Code.Core {
         private void Awake() {
 
             _rb ??= GetComponent<Rigidbody2D>();
+
+            Init();
+        }
+
+        private void Init() {
+
+            _isAlive = true;
         }
 
         private void Update() {
@@ -51,7 +59,7 @@ namespace Code.Core {
         }
 
         private float GetInputRotation() {
-            return Input.GetKey(leftInput) ? -1 : Input.GetKey(rightInput) ? 1 : 0f;
+            return Input.GetKey(leftInput) ? 1 : Input.GetKey(rightInput) ? -1 : 0f;
         }
 
         private void UpdatePowerUp() {
@@ -73,6 +81,7 @@ namespace Code.Core {
         }
 
         private void CheckGrounded() {
+
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, _whatIsGround);
             _isGrounded = hit.collider != null;
         }
