@@ -11,6 +11,7 @@ namespace Code.Core {
 
         [SerializeField][Min(1)] private float _rotationSpeed = 100f;
         [SerializeField][Min(1)] private float _jumpForce = 5f;
+        [SerializeField][Min(1)] private float _jumpXFriction = 1.3f;
         [SerializeField] private float _powerDuration = 5f;
 
         private bool _isAlive;
@@ -75,8 +76,8 @@ namespace Code.Core {
 
         private void Jump() {
 
-            Vector2 jumpVelocity = Quaternion.Euler(0f, 0f, _rb.rotation) * Vector2.up * _jumpForce;
-            _rb.velocity = jumpVelocity;
+            Vector2 jumpVelocity = transform.up * _jumpForce;
+            _rb.velocity = new Vector2(_rb.velocity.x / _jumpXFriction, 0) + jumpVelocity;
         }
 
         private void CheckGrounded() {
