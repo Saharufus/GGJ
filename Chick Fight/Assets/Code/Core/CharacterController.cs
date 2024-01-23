@@ -32,9 +32,9 @@ namespace Code.Core {
 
         private void Update() {
 
-            float rotationInput = GetInputRotation();
-
-            UpdateRotation(ref rotationInput);
+            if (GetInputRotation(out float rotationInput)) {
+                UpdateRotation(ref rotationInput);
+            }
 
             if (_isGrounded) {
                 _isGrounded = false;
@@ -43,6 +43,7 @@ namespace Code.Core {
 
             UpdatePowerUp();
         }
+
         private void FixedUpdate() {
 
             if (_isAlive) {
@@ -51,7 +52,23 @@ namespace Code.Core {
             }
         }
 
-        private float GetInputRotation() => Input.GetKey(_leftInput) ? 1 : Input.GetKey(_rightInput) ? -1 : 0f;
+        private bool GetInputRotation(out float rotationInput) {
+
+            rotationInput = 0;
+
+            if (_leftInput is KeyCode.None || _rightInput is KeyCode.None) {
+                return false;
+            }
+
+            if (Input.GetKey(_leftInput)) {
+                rotationInput = 1;
+            
+            } else if (Input.GetKey(_rightInput)) {
+                rotationInput = -1;
+            }
+
+            return true;
+        }
 
         private void UpdateRotation(ref float rotationInput) {
 
