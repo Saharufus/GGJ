@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Code.Core {
@@ -10,8 +9,8 @@ namespace Code.Core {
 
         [SerializeField] private Rigidbody2D _rb;
 
-        [SerializeField] private float _rotationSpeed = 100f;
-        [SerializeField] private float _jumpForce = 5f;
+        [SerializeField][Min(1)] private float _rotationSpeed = 100f;
+        [SerializeField][Min(1)] private float _jumpForce = 5f;
         [SerializeField] private float _powerDuration = 5f;
 
         private bool _isAlive;
