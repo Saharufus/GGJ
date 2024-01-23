@@ -24,7 +24,7 @@ MonoBehaviour:
   matchDurationInSeconds: 60
   powerUpDurtaionInSeconds: 5
   characterSettings:
-    jumpForce: 100
-    rotationSpeed: 5
+    jumpForce: 7
+    rotationSpeed: 15
     maxRotationDegree: 45
     jumpXFriction: 0.3
