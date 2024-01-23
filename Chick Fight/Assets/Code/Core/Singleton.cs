@@ -8,7 +8,7 @@ namespace Code.Core {
             get {
                 _instance ??= FindObjectOfType<T>();
                 if (_instance == null) {
-                    GameObject singletonObject = new GameObject();
+                    var singletonObject = new GameObject();
                     _instance = singletonObject.AddComponent<T>();
                     singletonObject.name = typeof(T).ToString() + " (Singleton)";
                     DontDestroyOnLoad(singletonObject);

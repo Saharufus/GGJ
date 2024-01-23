@@ -34,11 +34,7 @@ namespace Code.Core {
 
             float rotationInput = GetInputRotation();
 
-            float rotationAmount = rotationInput * _stats.rotationSpeed * Time.deltaTime;
-            float destRotation = _rb.rotation + rotationAmount;
-            if ((destRotation >= -_stats.maxRotationDegree && destRotation <= _stats.maxRotationDegree) || _stats.maxRotationDegree >= 180f) {
-                _rb.MoveRotation(_rb.rotation + rotationAmount);
-            }
+            UpdateRotation(ref rotationInput);
 
             if (_isGrounded) {
                 _isGrounded = false;
@@ -47,16 +43,26 @@ namespace Code.Core {
 
             UpdatePowerUp();
         }
-
         private void FixedUpdate() {
 
             if (_isAlive) {
+
                 CheckGrounded();
             }
         }
 
-        private float GetInputRotation() {
-            return Input.GetKey(_leftInput) ? 1 : Input.GetKey(_rightInput) ? -1 : 0f;
+        private float GetInputRotation() => Input.GetKey(_leftInput) ? 1 : Input.GetKey(_rightInput) ? -1 : 0f;
+
+        private void UpdateRotation(ref float rotationInput) {
+
+            float rotationAmount = rotationInput * _stats.rotationSpeed * Time.deltaTime;
+            float destRotation = _rb.rotation + rotationAmount;
+            float maxRotationDegree = _stats.maxRotationDegree;
+
+            if ((destRotation >= -maxRotationDegree && destRotation <= maxRotationDegree) || maxRotationDegree >= 180f) {
+
+                _rb.MoveRotation(_rb.rotation + rotationAmount);
+            }
         }
 
         private void UpdatePowerUp() {
