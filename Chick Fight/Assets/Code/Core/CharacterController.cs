@@ -42,7 +42,7 @@ namespace Code.Core {
 
             float rotationAmount = rotationInput * _rotationSpeed * Time.deltaTime;
             float destRotation = _rb.rotation + rotationAmount;
-            if (destRotation >= - _maxRotationDeg && destRotation <= _maxRotationDeg) {
+            if ((destRotation >= - _maxRotationDeg && destRotation <= _maxRotationDeg) || _maxRotationDeg >= 180f) {
                 _rb.MoveRotation(_rb.rotation + rotationAmount);
             }
 
