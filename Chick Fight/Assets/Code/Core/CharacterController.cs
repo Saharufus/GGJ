@@ -9,11 +9,7 @@ namespace Code.Core {
 
         [SerializeField] private Rigidbody2D _rb;
 
-        [SerializeField][Min(1)] private float _rotationSpeed = 100f;
-        [SerializeField][Min(0)] private float _maxRotationDeg = 45f;
-        [SerializeField][Min(1)] private float _jumpForce = 5f;
-        [SerializeField][Min(0)] private float _jumpXFriction = 0.3f;
-        [SerializeField] private float _powerDuration = 5f;
+        private CharacterSettings _stats;
 
         private bool _isAlive;
         private bool _isGrounded;
@@ -26,7 +22,9 @@ namespace Code.Core {
             _rb ??= GetComponent<Rigidbody2D>();
         }
 
-        public void Init(LayerMask whatIsGround) {
+        public void Init(LayerMask whatIsGround, CharacterSettings settings) {
+
+            _stats = settings;
 
             _isAlive = true;
             _whatIsGround = whatIsGround;
@@ -36,9 +34,9 @@ namespace Code.Core {
 
             float rotationInput = GetInputRotation();
 
-            float rotationAmount = rotationInput * _rotationSpeed * Time.deltaTime;
+            float rotationAmount = rotationInput * _stats.rotationSpeed * Time.deltaTime;
             float destRotation = _rb.rotation + rotationAmount;
-            if ((destRotation >= - _maxRotationDeg && destRotation <= _maxRotationDeg) || _maxRotationDeg >= 180f) {
+            if ((destRotation >= -_stats.maxRotationDegree && destRotation <= _stats.maxRotationDegree) || _stats.maxRotationDegree >= 180f) {
                 _rb.MoveRotation(_rb.rotation + rotationAmount);
             }
 
@@ -75,8 +73,8 @@ namespace Code.Core {
 
         private void Jump() {
 
-            Vector2 jumpVelocity = transform.up * _jumpForce;
-            _rb.velocity = new Vector2(_rb.velocity.x / (_jumpXFriction + 1), 0) + jumpVelocity;
+            Vector2 jumpVelocity = transform.up * _stats.jumpForce;
+            _rb.velocity = new Vector2(_rb.velocity.x / (_stats.jumpXFriction + 1), 0) + jumpVelocity;
         }
 
         private void CheckGrounded() {
@@ -95,7 +93,7 @@ namespace Code.Core {
 
             _hasPower = true;
             // todo: get the duration of the powerup from the powerup item or by the gameplay controller
-            _powerTimer = _powerDuration;
+            GameplayController.Instance.ActivatePowerUp(this);
         }
 
         private void EndPower() {
