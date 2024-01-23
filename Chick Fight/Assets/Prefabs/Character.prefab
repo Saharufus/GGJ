@@ -85,6 +85,12 @@ MonoBehaviour:
   _rotationSpeed: 100
   _jumpForce: 5
   _powerDuration: 5
+  _whatIsCharacter:
+    serializedVersion: 2
+    m_Bits: 128
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &1311136424414644504
 Rigidbody2D:
   serializedVersion: 4

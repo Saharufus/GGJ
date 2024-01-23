@@ -18,6 +18,10 @@ namespace Code.Core {
         private bool _hasPower;
         private float _powerTimer;
 
+        // move this to gameplay controller
+        [SerializeField] private LayerMask _whatIsCharacter;
+        [SerializeField] private LayerMask _whatIsGround;
+
         private void Awake() {
 
             _rb ??= GetComponent<Rigidbody2D>();
@@ -32,8 +36,8 @@ namespace Code.Core {
             _rb.MoveRotation(_rb.rotation + rotationAmount);
 
             if (_isGrounded) {
-                Jump();
                 _isGrounded = false;
+                Jump();
             }
 
             UpdatePowerUp();
@@ -69,7 +73,7 @@ namespace Code.Core {
         }
 
         private void CheckGrounded() {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, _whatIsGround);
             _isGrounded = hit.collider != null;
         }
 
