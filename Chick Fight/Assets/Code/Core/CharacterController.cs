@@ -4,8 +4,8 @@ namespace Code.Core {
 
     public class CharacterController : MonoBehaviour {
 
-        [SerializeField] private KeyCode leftInput;
-        [SerializeField] private KeyCode rightInput;
+        [SerializeField] private KeyCode _leftInput;
+        [SerializeField] private KeyCode _rightInput;
 
         [SerializeField] private Rigidbody2D _rb;
 
@@ -18,21 +18,17 @@ namespace Code.Core {
         private bool _isGrounded;
         private bool _hasPower;
         private float _powerTimer;
-
-        // move this to gameplay controller
-        [SerializeField] private LayerMask _whatIsCharacter;
-        [SerializeField] private LayerMask _whatIsGround;
+        private LayerMask _whatIsGround;
 
         private void Awake() {
 
             _rb ??= GetComponent<Rigidbody2D>();
-
-            Init();
         }
 
-        private void Init() {
+        public void Init(LayerMask whatIsGround) {
 
             _isAlive = true;
+            _whatIsGround = whatIsGround;
         }
 
         private void Update() {
@@ -59,7 +55,7 @@ namespace Code.Core {
         }
 
         private float GetInputRotation() {
-            return Input.GetKey(leftInput) ? 1 : Input.GetKey(rightInput) ? -1 : 0f;
+            return Input.GetKey(_leftInput) ? 1 : Input.GetKey(_rightInput) ? -1 : 0f;
         }
 
         private void UpdatePowerUp() {
