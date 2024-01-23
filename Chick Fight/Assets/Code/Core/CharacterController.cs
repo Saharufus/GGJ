@@ -81,7 +81,7 @@ namespace Code.Core {
 
         private void CheckGrounded() {
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, _whatIsGround);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1f, _whatIsGround);
             _isGrounded = hit.collider != null;
         }
 
