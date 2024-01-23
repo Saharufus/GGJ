@@ -4,43 +4,37 @@ namespace Code.Core {
 
     public class CharacterController : MonoBehaviour {
 
-        [SerializeField] private KeyCode leftInput;
-        [SerializeField] private KeyCode rightInput;
+        [SerializeField] private KeyCode _leftInput;
+        [SerializeField] private KeyCode _rightInput;
 
         [SerializeField] private Rigidbody2D _rb;
 
-        [SerializeField][Min(1)] private float _rotationSpeed = 100f;
-        [SerializeField][Min(1)] private float _jumpForce = 5f;
-        [SerializeField] private float _powerDuration = 5f;
+        private CharacterSettings _stats;
 
         private bool _isAlive;
         private bool _isGrounded;
         private bool _hasPower;
         private float _powerTimer;
-
-        // move this to gameplay controller
-        [SerializeField] private LayerMask _whatIsCharacter;
-        [SerializeField] private LayerMask _whatIsGround;
+        private LayerMask _whatIsGround;
 
         private void Awake() {
 
             _rb ??= GetComponent<Rigidbody2D>();
-
-            Init();
         }
 
-        private void Init() {
+        public void Init(LayerMask whatIsGround, CharacterSettings settings) {
+
+            _stats = settings;
 
             _isAlive = true;
+            _whatIsGround = whatIsGround;
         }
 
         private void Update() {
 
-            float rotationInput = GetInputRotation();
-
-            float rotationAmount = rotationInput * _rotationSpeed * Time.deltaTime;
-
-            _rb.MoveRotation(_rb.rotation + rotationAmount);
+            if (GetInputRotation(out float rotationInput)) {
+                UpdateRotation(ref rotationInput);
+            }
 
             if (_isGrounded) {
                 _isGrounded = false;
@@ -53,12 +47,39 @@ namespace Code.Core {
         private void FixedUpdate() {
 
             if (_isAlive) {
+
                 CheckGrounded();
             }
         }
 
-        private float GetInputRotation() {
-            return Input.GetKey(leftInput) ? 1 : Input.GetKey(rightInput) ? -1 : 0f;
+        private bool GetInputRotation(out float rotationInput) {
+
+            rotationInput = 0;
+
+            if (_leftInput is KeyCode.None || _rightInput is KeyCode.None) {
+                return false;
+            }
+
+            if (Input.GetKey(_leftInput)) {
+                rotationInput = 1;
+            
+            } else if (Input.GetKey(_rightInput)) {
+                rotationInput = -1;
+            }
+
+            return true;
+        }
+
+        private void UpdateRotation(ref float rotationInput) {
+
+            float rotationAmount = rotationInput * _stats.rotationSpeed * Time.deltaTime;
+            float destRotation = _rb.rotation + rotationAmount;
+            float maxRotationDegree = _stats.maxRotationDegree;
+
+            if ((destRotation >= -maxRotationDegree && destRotation <= maxRotationDegree) || maxRotationDegree >= 180f) {
+
+                _rb.MoveRotation(_rb.rotation + rotationAmount);
+            }
         }
 
         private void UpdatePowerUp() {
@@ -75,8 +96,8 @@ namespace Code.Core {
 
         private void Jump() {
 
-            Vector2 jumpVelocity = Quaternion.Euler(0f, 0f, _rb.rotation) * Vector2.up * _jumpForce;
-            _rb.velocity = jumpVelocity;
+            Vector2 jumpVelocity = transform.up * _stats.jumpForce;
+            _rb.velocity = new Vector2(_rb.velocity.x / (_stats.jumpXFriction + 1), 0) + jumpVelocity;
         }
 
         private void CheckGrounded() {
@@ -95,7 +116,7 @@ namespace Code.Core {
 
             _hasPower = true;
             // todo: get the duration of the powerup from the powerup item or by the gameplay controller
-            _powerTimer = _powerDuration;
+            GameplayController.Instance.ActivatePowerUp(this);
         }
 
         private void EndPower() {

@@ -79,18 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4050cba54ba884caf5254088527ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftInput: 276
-  rightInput: 275
+  _leftInput: 0
+  _rightInput: 0
   _rb: {fileID: 1311136424414644504}
-  _rotationSpeed: 100
-  _jumpForce: 5
-  _powerDuration: 5
-  _whatIsCharacter:
-    serializedVersion: 2
-    m_Bits: 128
-  _whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
+  _body: {fileID: 6473466563195904162}
 --- !u!50 &1311136424414644504
 Rigidbody2D:
   serializedVersion: 4
