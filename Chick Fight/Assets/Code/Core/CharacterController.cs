@@ -8,6 +8,7 @@ namespace Code.Core {
         [SerializeField] private KeyCode _rightInput;
 
         [SerializeField] private Rigidbody2D _rb;
+        [SerializeField] private Transform _body;
 
         private CharacterSettings _stats;
 
@@ -98,16 +99,24 @@ namespace Code.Core {
 
             Vector2 jumpVelocity = transform.up * _stats.jumpForce;
             _rb.velocity = new Vector2(_rb.velocity.x / (_stats.jumpXFriction + 1), 0) + jumpVelocity;
+            _rb.angularVelocity = 0;
         }
 
         private void CheckGrounded() {
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1f, _whatIsGround);
-            Debug.DrawRay(transform.position, -transform.up, Color.white, 2);
-            _isGrounded = hit.collider != null;
-            if (_isGrounded ) {
-                Debug.DrawLine(transform.position, hit.collider.ClosestPoint(transform.position), Color.red, 2);
+            var hits = Physics2D.RaycastAll(transform.position, -transform.up, 1f, _whatIsGround);
+
+            _isGrounded = false;
+            foreach (var hit in hits) {
+
+                if (hit.collider == null || hit.collider.transform == _body) {
+                    continue;
+                }
+
+                _isGrounded = true;
+                return;
             }
+            
         }
 
         private void OnTriggerEnter2D(Collider2D collision) {

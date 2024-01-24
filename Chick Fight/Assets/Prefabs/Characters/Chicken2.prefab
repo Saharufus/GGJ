@@ -49,6 +49,7 @@ MonoBehaviour:
   _leftInput: 276
   _rightInput: 275
   _rb: {fileID: 6367592947043053126}
+  _body: {fileID: 899225325129927750}
 --- !u!50 &6367592947043053126
 Rigidbody2D:
   serializedVersion: 4
@@ -242,6 +243,11 @@ PrefabInstance:
       addedObject: {fileID: 4834743699945569550}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
+--- !u!4 &899225325129927750 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6473466563195904162, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
+  m_PrefabInstance: {fileID: 6173572117079960804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2322005367481616944 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8472824190893057748, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
