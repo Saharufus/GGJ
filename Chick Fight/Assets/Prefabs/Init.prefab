@@ -1333,10 +1333,8 @@ MonoBehaviour:
   - {fileID: 1221780640415425357}
   _platforms:
   - {fileID: 5781417669060351776}
-  _wormSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  _powerupLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  _powerUpTransform: {fileID: 4533199514417441178}
+  _powerUp: {fileID: 2375340911018825640, guid: 6a0e248970385d64ea1f39c9a92bf082, type: 3}
 --- !u!1001 &2994404851957730545
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -116,19 +116,24 @@ namespace Code.Core {
 
         private void OnTriggerEnter2D(Collider2D collision) {
 
-            if (collision.gameObject.layer == _settings.whatIsPowerUp && !_hasPower)
-            {
+            if (!_hasPower) {
+
+                var powerUpCollider = collision.gameObject.GetComponent<PowerUp>();
+                PickUpPower(powerUpCollider);
                 Destroy(collision.gameObject);
-                Debug.Log("powerup picked");
-                PickUpPower();
             }
         }
 
-        private void PickUpPower() {
+        private void PickUpPower(PowerUp powerUp) {
 
+            if (powerUp == null) {
+                return;
+            }
+
+            Debug.Log("powerup picked");
             _hasPower = true;
             _powerTimer = _settings.powerUpDurtaionInSeconds;
-            GameplayController.Instance.ActivatePowerUp(this);
+            GameplayController.Instance.ActivatePowerUp(this, powerUp);
         }
 
         private void EndPower() {

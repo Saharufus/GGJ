@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Core {
 
-    [DefaultExecutionOrder(2)]
+    [DefaultExecutionOrder(1)]
     public class SoundSystem : Singleton<SoundSystem> {
 
         public static SoundSystem _instance;

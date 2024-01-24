@@ -6,16 +6,13 @@ namespace Code.Core {
 
     public class PowerUp : MonoBehaviour {
 
-        private List<PowerUpEffectData> _stats;
+        public List<PowerUpEffectData> _stats;
 
-        public void Init(List<PowerUpEffectData> stats) {
+        public void Init(PowerUpData data) {
 
-            _stats = stats;
-        }
+            _stats = data.effects;
 
-        public void End() { 
-            
-            gameObject.SetActive(false);
+            Destroy(gameObject, Time.time + data.durationInSeconds);
         }
     }
 }

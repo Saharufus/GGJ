@@ -12,6 +12,7 @@ namespace Code.Core {
         [SerializeField] private GameplaySettings _settings;
         [SerializeField] private List<CharacterController> _characters;
         [SerializeField] private Transform[] _platforms;
+        [SerializeField] private Transform _powerUpTransform;
         [SerializeField] private PowerUp _powerUp;
 
         private float powerupSpawnTimer = 0;
@@ -27,14 +28,15 @@ namespace Code.Core {
             float spawnYPos = platformToSpawnOn.localScale.y * platformSprite.sprite.bounds.extents.y;
             Vector2 spawnPos = platformToSpawnOn.position + platformToSpawnOn.TransformDirection(new Vector2(spawnXPos, spawnYPos));
 
-            // todo: remove all the get component, make this into a prefab for powerups, especially get rid of the transform find
-            var worm = Instantiate(_powerUp);
+            var worm = Instantiate(_powerUp, _powerUpTransform.parent);
             var powerUpEffects = Random.Range(0, _settings.powerUpSettings.powerUps.Count);
-            worm.Init(_settings.powerUpSettings.powerUps[powerUpEffects].effects);
+            worm.Init(_settings.powerUpSettings.powerUps[powerUpEffects]);
             worm.transform.SetPositionAndRotation(spawnPos, platformToSpawnOn.rotation);
         }
 
-        public void ActivatePowerUp(CharacterController characterController) {
+        public void ActivatePowerUp(CharacterController characterController, PowerUp powerUp) {
+
+            Debug.Log($"{characterController} collected powerup "+ powerUp._stats.Count);
             // todo: activate the powerup for a duration on the character and then deactivate
         }
 
@@ -72,6 +74,7 @@ namespace Code.Core {
             }
 
             InitCharacters();
+            SoundSystem.Instance.PlayMusic(DataClasses.MusicType.Menu);
         }
 
         private void InitCharacters() {
