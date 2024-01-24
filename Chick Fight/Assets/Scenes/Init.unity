@@ -187,6 +187,30 @@ PrefabInstance:
       propertyPath: _characters.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5683640743584826893, guid: 405248cbc7dfc744aaefb9b55485227a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181926828920698567, guid: 405248cbc7dfc744aaefb9b55485227a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8320676348439289716, guid: 405248cbc7dfc744aaefb9b55485227a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: b1cf27226e6aaa14da2f742d268a675c, type: 2}
+    - target: {fileID: 8320676348439289716, guid: 405248cbc7dfc744aaefb9b55485227a, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8320676348439289716, guid: 405248cbc7dfc744aaefb9b55485227a, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828287494217537443, guid: 405248cbc7dfc744aaefb9b55485227a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

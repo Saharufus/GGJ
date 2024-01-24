@@ -52,6 +52,10 @@ namespace Code.Core {
 
             foreach (CharacterController character in _characters) {
 
+                if (character == null) {
+                    Debug.Log($"GameplayController has missing character ref {character.gameObject.name}");
+                    continue;
+                }
                 character.Init(_settings.whatIsGround, _settings.characterSettings);
             }
         }

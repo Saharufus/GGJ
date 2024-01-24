@@ -103,7 +103,11 @@ namespace Code.Core {
         private void CheckGrounded() {
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1f, _whatIsGround);
+            Debug.DrawRay(transform.position, -transform.up, Color.white, 2);
             _isGrounded = hit.collider != null;
+            if (_isGrounded ) {
+                Debug.DrawLine(transform.position, hit.collider.ClosestPoint(transform.position), Color.red, 2);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision) {
