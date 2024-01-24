@@ -10,6 +10,7 @@ namespace Code.Core {
 
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Transform _body;
+        [SerializeField] private LayerMask _powerupLayer;
 
         private CharacterData _stats;
 
@@ -122,7 +123,7 @@ namespace Code.Core {
 
         private void OnTriggerEnter2D(Collider2D collision) {
 
-            if (collision.gameObject.layer == 8)
+            if (collision.gameObject.layer == (int)Mathf.Log(_powerupLayer.value, 2))
             {
                 Destroy(collision.gameObject);
                 Debug.Log("powerup picked");

@@ -83,6 +83,9 @@ MonoBehaviour:
   _rightInput: 0
   _rb: {fileID: 1311136424414644504}
   _body: {fileID: 6473466563195904162}
+  _powerupLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &1311136424414644504
 Rigidbody2D:
   serializedVersion: 4

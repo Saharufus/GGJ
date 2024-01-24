@@ -12,6 +12,7 @@ namespace Code.Core {
         [SerializeField] private List<CharacterController> _characters;
         [SerializeField] private Transform[] _platforms;
         [SerializeField] private Sprite _wormSprite;
+        [SerializeField] private LayerMask _powerupLayer;
         private float powerupSpawnTimer = 0;
 
         public void SpawnPowerUp()
@@ -26,8 +27,10 @@ namespace Code.Core {
             Vector2 spawnPos = platformToSpawnOn.position + platformToSpawnOn.TransformDirection(new Vector2(spawnXPos, spawnYPos));
 
             GameObject worm = new GameObject("worm");
+            worm.transform.parent = transform.Find("Components/PowerUps");
             worm.transform.SetPositionAndRotation(spawnPos, platformToSpawnOn.rotation);
-            worm.layer = 8;
+            worm.layer = (int)Mathf.Log(_powerupLayer.value, 2);
+            Debug.Log((int)Mathf.Log(_powerupLayer.value, 2));
             worm.AddComponent<SpriteRenderer>().sprite = _wormSprite;
             worm.AddComponent<CapsuleCollider2D>().isTrigger = true;
         }
