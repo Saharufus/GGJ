@@ -1,4 +1,5 @@
 using Code.DataClasses;
+using System;
 using UnityEngine;
 
 namespace Code.Core {
@@ -14,6 +15,7 @@ namespace Code.Core {
         private CharacterData _stats;
         private GameplaySettings _settings;
 
+        private bool _active;
         private bool _isAlive;
         private bool _isGrounded;
         private bool _hasPower;
@@ -30,9 +32,14 @@ namespace Code.Core {
             _settings = settings;
 
             _isAlive = true;
+            Activate(false);
         }
 
         private void Update() {
+
+            if (!_active) {
+                return;
+            }
 
             if (GetInputRotation(out float rotationInput)) {
                 UpdateRotation(ref rotationInput);
@@ -47,6 +54,10 @@ namespace Code.Core {
         }
 
         private void FixedUpdate() {
+
+            if (!_active) {
+                return;
+            }
 
             if (_isAlive) {
 
@@ -141,5 +152,10 @@ namespace Code.Core {
             _hasPower = false;
         }
 
+        public void Activate(bool isActive) {
+
+            _active = isActive;
+            _rb.simulated = _active;
+        }
     }
 }

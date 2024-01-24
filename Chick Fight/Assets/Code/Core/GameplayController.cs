@@ -63,6 +63,10 @@ namespace Code.Core {
             Init();
         }
 
+        public void StartGame() {
+            ActivateCharacters();
+        }
+
         private void Init() {
             
             if (_settings == null) {
@@ -75,8 +79,9 @@ namespace Code.Core {
                 return;
             }
 
-            InitCharacters();
             SoundSystem.Instance.PlayMusic(DataClasses.MusicType.Menu);
+
+            InitCharacters();
         }
 
         private void InitCharacters() {
@@ -92,6 +97,22 @@ namespace Code.Core {
                     continue;
                 }
                 character.Init(_settings);
+            }
+        }
+
+        private void ActivateCharacters() {
+
+            if (_characters == null || _characters.Count == 0) {
+                return;
+            }
+
+            foreach (CharacterController character in _characters) {
+
+                if (character == null) {
+                    Debug.Log($"GameplayController has missing character ref {character.gameObject.name}");
+                    continue;
+                }
+                character.Activate(true);
             }
         }
     }
