@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Code.Core {
@@ -11,12 +12,12 @@ namespace Code.Core {
         [SerializeField] private GameplaySettings _settings;
         [SerializeField] private List<CharacterController> _characters;
         [SerializeField] private Transform[] _platforms;
-        [SerializeField] private Sprite _wormSprite;
-        [SerializeField] private LayerMask _powerupLayer;
+        [SerializeField] private PowerUp _powerUp;
+
         private float powerupSpawnTimer = 0;
 
-        public void SpawnPowerUp()
-        {
+        public void SpawnPowerUp() {
+
             Transform platformToSpawnOn = _platforms[Random.Range(0, _platforms.Length)];
             SpriteRenderer platformSprite = platformToSpawnOn.GetComponent<SpriteRenderer>();
 
@@ -26,24 +27,23 @@ namespace Code.Core {
             float spawnYPos = platformToSpawnOn.localScale.y * platformSprite.sprite.bounds.extents.y;
             Vector2 spawnPos = platformToSpawnOn.position + platformToSpawnOn.TransformDirection(new Vector2(spawnXPos, spawnYPos));
 
-            GameObject worm = new GameObject("worm");
-            worm.transform.parent = transform.Find("Components/PowerUps");
+            // todo: remove all the get component, make this into a prefab for powerups, especially get rid of the transform find
+            var worm = Instantiate(_powerUp);
+            var powerUpEffects = Random.Range(0, _settings.powerUpSettings.powerUps.Count);
+            worm.Init(_settings.powerUpSettings.powerUps[powerUpEffects].effects);
             worm.transform.SetPositionAndRotation(spawnPos, platformToSpawnOn.rotation);
-            worm.layer = _settings.whatIsPowerUp;
-            worm.AddComponent<SpriteRenderer>().sprite = _wormSprite;
-            worm.AddComponent<CapsuleCollider2D>().isTrigger = true;
         }
+
         public void ActivatePowerUp(CharacterController characterController) {
             // todo: activate the powerup for a duration on the character and then deactivate
         }
 
-        public void Update()
-        {
+        public void Update() {
+
             powerupSpawnTimer += Time.deltaTime;
-            if (powerupSpawnTimer >= _settings.powerupSpawnTime)
-            {
-                //SpawnPowerUp();
+            if (powerupSpawnTimer >= _settings.powerupSpawnTime) {
                 powerupSpawnTimer = 0;
+                SpawnPowerUp();
             }
         }
 

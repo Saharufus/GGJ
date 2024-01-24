@@ -22,11 +22,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   matchDurationInSeconds: 60
-  powerUpDurtaionInSeconds: 5
   characterSettings:
     jumpForce: 7
     rotationSpeed: 1000
-    maxRotationDegree: 45
     jumpXFriction: 0.3
   powerUpSettings:
     powerUps:
@@ -36,11 +34,13 @@ MonoBehaviour:
         value: 1.5
       - effect: 2
         value: 1.5
-      sound: 0
+      sound: 
     - durationInSeconds: 5
       effects:
       - effect: 1
         value: 0.5
       - effect: 2
         value: 0.5
-      sound: 0
+      sound: 
+  powerUpDurtaionInSeconds: 5
+  powerupSpawnTime: 7

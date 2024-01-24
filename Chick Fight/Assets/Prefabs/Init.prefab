@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 7599923719197078155}
   - component: {fileID: 2025179097671985606}
   m_Layer: 0
-  m_Name: 'Menu Music '
+  m_Name: 'Music '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,9 +717,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 362a8bc74d08a5e42ac13b6ff1f264b9, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.499
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -942,8 +942,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3552392176138272903}
+  - component: {fileID: 2245898777870499861}
   m_Layer: 0
-  m_Name: Music
+  m_Name: SoundSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -966,6 +967,21 @@ Transform:
   - {fileID: 358278007374877811}
   m_Father: {fileID: 7240926958617885117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2245898777870499861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952706129893234101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb951e00821e0f842a7fe370550e6bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 4024395d5639c0847a99f415a19b34f2, type: 2}
+  musicSource: {fileID: 2025179097671985606}
+  sfxSource: {fileID: 2796435628376881968}
 --- !u!1 &8221315725818964399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1161,7 @@ GameObject:
   - component: {fileID: 358278007374877811}
   - component: {fileID: 2796435628376881968}
   m_Layer: 0
-  m_Name: Level Music
+  m_Name: SoundEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1176,12 +1192,12 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 307f65848fb566d4f991035b546301ef, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.494
   m_Pitch: 1
-  Loop: 1
-  Mute: 1
+  Loop: 0
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -1315,6 +1331,12 @@ MonoBehaviour:
   - {fileID: 6064461493475831110}
   - {fileID: 455910575981658499}
   - {fileID: 1221780640415425357}
+  _platforms:
+  - {fileID: 5781417669060351776}
+  _wormSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  _powerupLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &2994404851957730545
 PrefabInstance:
   m_ObjectHideFlags: 0
