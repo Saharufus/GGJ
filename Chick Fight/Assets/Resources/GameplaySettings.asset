@@ -25,6 +25,11 @@ MonoBehaviour:
   powerUpDurtaionInSeconds: 5
   characterSettings:
     jumpForce: 7
-    rotationSpeed: 50
+    rotationSpeed: 1000
     maxRotationDegree: 45
     jumpXFriction: 0.3
+  powerUpSettings:
+    powerUps:
+    - durationInSeconds: 1
+      effects: []
+      sound: 0
