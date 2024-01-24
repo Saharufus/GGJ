@@ -30,7 +30,6 @@ namespace Code.Core {
             worm.transform.parent = transform.Find("Components/PowerUps");
             worm.transform.SetPositionAndRotation(spawnPos, platformToSpawnOn.rotation);
             worm.layer = (int)Mathf.Log(_powerupLayer.value, 2);
-            Debug.Log((int)Mathf.Log(_powerupLayer.value, 2));
             worm.AddComponent<SpriteRenderer>().sprite = _wormSprite;
             worm.AddComponent<CapsuleCollider2D>().isTrigger = true;
         }

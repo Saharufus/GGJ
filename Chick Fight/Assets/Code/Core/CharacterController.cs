@@ -76,13 +76,7 @@ namespace Code.Core {
         private void UpdateRotation(ref float rotationInput) {
 
             float rotationAmount = rotationInput * _stats.rotationSpeed * Time.deltaTime;
-            float destRotation = _rb.rotation + rotationAmount;
-            float maxRotationDegree = _stats.maxRotationDegree;
-
-            if ((destRotation >= -maxRotationDegree && destRotation <= maxRotationDegree) || maxRotationDegree >= 180f) {
-
-                _rb.MoveRotation(_rb.rotation + rotationAmount);
-            }
+            _rb.MoveRotation(_rb.rotation + rotationAmount);
         }
 
         private void UpdatePowerUp() {
