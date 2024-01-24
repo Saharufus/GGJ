@@ -12,14 +12,12 @@ namespace Code.Core {
         [SerializeField] private Transform _body;
 
         private CharacterData _stats;
-        private GameplaySettings _gameplayStats;
+        private GameplaySettings _settings;
 
         private bool _isAlive;
         private bool _isGrounded;
         private bool _hasPower;
         private float _powerTimer;
-        private LayerMask _whatIsGround;
-        private LayerMask _powerupLayer;
 
         private void Awake() {
 
@@ -29,11 +27,9 @@ namespace Code.Core {
         public void Init(GameplaySettings settings) {
 
             _stats = settings.characterSettings;
-            _gameplayStats = settings;
+            _settings = settings;
 
             _isAlive = true;
-            _whatIsGround = settings.whatIsGround;
-            _powerupLayer = settings.whatIsPowerUp;
         }
 
         private void Update() {
@@ -103,7 +99,7 @@ namespace Code.Core {
 
         private void CheckGrounded() {
 
-            var hits = Physics2D.RaycastAll(transform.position, -transform.up, 1f, _whatIsGround);
+            var hits = Physics2D.RaycastAll(transform.position, -transform.up, 1f, _settings.whatIsGround);
 
             _isGrounded = false;
             foreach (var hit in hits) {
@@ -120,7 +116,7 @@ namespace Code.Core {
 
         private void OnTriggerEnter2D(Collider2D collision) {
 
-            if (collision.gameObject.layer == (int)Mathf.Log(_powerupLayer.value, 2) && !_hasPower)
+            if (collision.gameObject.layer == _settings.whatIsPowerUp && !_hasPower)
             {
                 Destroy(collision.gameObject);
                 Debug.Log("powerup picked");
@@ -131,7 +127,7 @@ namespace Code.Core {
         private void PickUpPower() {
 
             _hasPower = true;
-            _powerTimer = _gameplayStats.powerUpDurtaionInSeconds;
+            _powerTimer = _settings.powerUpDurtaionInSeconds;
             GameplayController.Instance.ActivatePowerUp(this);
         }
 
