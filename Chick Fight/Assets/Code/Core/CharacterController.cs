@@ -13,6 +13,7 @@ namespace Code.Core {
         [SerializeField] private LayerMask _powerupLayer;
 
         private CharacterData _stats;
+        private GameplaySettings _gameplayStats;
 
         private bool _isAlive;
         private bool _isGrounded;
@@ -25,9 +26,10 @@ namespace Code.Core {
             _rb ??= GetComponent<Rigidbody2D>();
         }
 
-        public void Init(LayerMask whatIsGround, CharacterData settings) {
+        public void Init(LayerMask whatIsGround, GameplaySettings settings) {
 
-            _stats = settings;
+            _stats = settings.characterSettings;
+            _gameplayStats = settings;
 
             _isAlive = true;
             _whatIsGround = whatIsGround;
@@ -117,7 +119,7 @@ namespace Code.Core {
 
         private void OnTriggerEnter2D(Collider2D collision) {
 
-            if (collision.gameObject.layer == (int)Mathf.Log(_powerupLayer.value, 2))
+            if (collision.gameObject.layer == (int)Mathf.Log(_powerupLayer.value, 2) && !_hasPower)
             {
                 Destroy(collision.gameObject);
                 Debug.Log("powerup picked");
@@ -128,7 +130,7 @@ namespace Code.Core {
         private void PickUpPower() {
 
             _hasPower = true;
-            // todo: get the duration of the powerup from the powerup item or by the gameplay controller
+            _powerTimer = _gameplayStats.powerUpDurtaionInSeconds;
             GameplayController.Instance.ActivatePowerUp(this);
         }
 

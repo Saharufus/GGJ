@@ -34,7 +34,6 @@ namespace Code.Core {
             worm.AddComponent<CapsuleCollider2D>().isTrigger = true;
         }
         public void ActivatePowerUp(CharacterController characterController) {
-            
             // todo: activate the powerup for a duration on the character and then deactivate
         }
 
@@ -87,7 +86,7 @@ namespace Code.Core {
                     Debug.Log($"GameplayController has missing character ref {character.gameObject.name}");
                     continue;
                 }
-                character.Init(_settings.whatIsGround, _settings.characterSettings);
+                character.Init(_settings.whatIsGround, _settings);
             }
         }
     }
