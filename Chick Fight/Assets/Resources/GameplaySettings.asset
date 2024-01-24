@@ -30,6 +30,17 @@ MonoBehaviour:
     jumpXFriction: 0.3
   powerUpSettings:
     powerUps:
-    - durationInSeconds: 1
-      effects: []
+    - durationInSeconds: 5
+      effects:
+      - effect: 1
+        value: 1.5
+      - effect: 2
+        value: 1.5
+      sound: 0
+    - durationInSeconds: 5
+      effects:
+      - effect: 1
+        value: 0.5
+      - effect: 2
+        value: 0.5
       sound: 0
