@@ -29,7 +29,4 @@ MonoBehaviour:
     maxRotationDegree: 45
     jumpXFriction: 0.3
   powerUpSettings:
-    powerUps:
-    - durationInSeconds: 1
-      effects: []
-      sound: 0
+    powerUps: []

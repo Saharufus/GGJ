@@ -1,3 +1,4 @@
+using Code.DataClasses;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameplaySettings", menuName = "Data/GameplaySettings")]
