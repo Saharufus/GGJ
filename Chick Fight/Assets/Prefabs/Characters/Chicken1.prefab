@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 74995865363839851}
   - component: {fileID: 7928759193242474150}
+  - component: {fileID: 6554628982310065029}
   m_Layer: 0
   m_Name: Chicken1
   m_TagString: Untagged
@@ -47,7 +48,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftInput: 276
   _rightInput: 275
-  _rb: {fileID: 3689487330241066519}
+  _rb: {fileID: 6554628982310065029}
+--- !u!50 &6554628982310065029
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454087688331187786}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1627855558819076744
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 910553331113994849, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
+    - {fileID: 1311136424414644504, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 483838241908138067, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
@@ -216,11 +245,6 @@ PrefabInstance:
 --- !u!4 &2861851595651555164 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 483838241908138067, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
-  m_PrefabInstance: {fileID: 2378365199647063823}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &3689487330241066519 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 1311136424414644504, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
   m_PrefabInstance: {fileID: 2378365199647063823}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6094533826793003483 stripped
