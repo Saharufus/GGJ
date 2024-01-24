@@ -10,7 +10,7 @@ namespace Code.Core {
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Transform _body;
 
-        private CharacterSettings _stats;
+        private CharacterData _stats;
 
         private bool _isAlive;
         private bool _isGrounded;
@@ -23,7 +23,7 @@ namespace Code.Core {
             _rb ??= GetComponent<Rigidbody2D>();
         }
 
-        public void Init(LayerMask whatIsGround, CharacterSettings settings) {
+        public void Init(LayerMask whatIsGround, CharacterData settings) {
 
             _stats = settings;
 
