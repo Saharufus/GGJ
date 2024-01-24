@@ -44,6 +44,7 @@ namespace Code.Core {
                 return;
             }
 
+            musicSource.clip = musicClip;
             musicSource.PlayOneShot(musicClip);
         }
 
