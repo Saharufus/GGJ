@@ -10,7 +10,6 @@ namespace Code.Core {
 
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Transform _body;
-        [SerializeField] private LayerMask _powerupLayer;
 
         private CharacterData _stats;
         private GameplaySettings _gameplayStats;
@@ -20,19 +19,21 @@ namespace Code.Core {
         private bool _hasPower;
         private float _powerTimer;
         private LayerMask _whatIsGround;
+        private LayerMask _powerupLayer;
 
         private void Awake() {
 
             _rb ??= GetComponent<Rigidbody2D>();
         }
 
-        public void Init(LayerMask whatIsGround, GameplaySettings settings) {
+        public void Init(GameplaySettings settings) {
 
             _stats = settings.characterSettings;
             _gameplayStats = settings;
 
             _isAlive = true;
-            _whatIsGround = whatIsGround;
+            _whatIsGround = settings.whatIsGround;
+            _powerupLayer = settings.whatIsPowerUp;
         }
 
         private void Update() {

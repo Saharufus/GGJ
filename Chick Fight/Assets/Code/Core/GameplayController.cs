@@ -86,7 +86,7 @@ namespace Code.Core {
                     Debug.Log($"GameplayController has missing character ref {character.gameObject.name}");
                     continue;
                 }
-                character.Init(_settings.whatIsGround, _settings);
+                character.Init(_settings);
             }
         }
     }
