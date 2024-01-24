@@ -10,10 +10,36 @@ namespace Code.Core {
 
         [SerializeField] private GameplaySettings _settings;
         [SerializeField] private List<CharacterController> _characters;
+        [SerializeField] private Transform[] _platforms;
+        [SerializeField] private Sprite _wormSprite;
 
+        public void SpawnPowerUp()
+        {
+            Transform platformToSpawnOn = _platforms[Random.Range(0, _platforms.Length)];
+            SpriteRenderer platformSprite = platformToSpawnOn.GetComponent<SpriteRenderer>();
+
+            float platformXScale = (platformToSpawnOn.localScale.x * platformSprite.sprite.bounds.extents.x) - 1;
+
+            float spawnXPos = Random.Range(-platformXScale, platformXScale);
+            float spawnYPos = platformToSpawnOn.localScale.y * platformSprite.sprite.bounds.extents.y;
+            Vector2 spawnPos = platformToSpawnOn.position + platformToSpawnOn.TransformDirection(new Vector2(spawnXPos, spawnYPos));
+
+            GameObject worm = new GameObject("worm");
+            worm.transform.SetPositionAndRotation(spawnPos, platformToSpawnOn.rotation);
+            worm.AddComponent<SpriteRenderer>().sprite = _wormSprite;
+            worm.AddComponent<CapsuleCollider2D>().isTrigger = true;
+        }
         public void ActivatePowerUp(CharacterController characterController) {
             
             // todo: activate the powerup for a duration on the character and then deactivate
+        }
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                SpawnPowerUp();
+            }
         }
 
         private void Awake() {
