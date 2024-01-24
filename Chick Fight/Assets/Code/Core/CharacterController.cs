@@ -1,3 +1,4 @@
+using Code.DataClasses;
 using UnityEngine;
 
 namespace Code.Core {
@@ -11,24 +12,24 @@ namespace Code.Core {
         [SerializeField] private Transform _body;
 
         private CharacterData _stats;
+        private GameplaySettings _settings;
 
         private bool _isAlive;
         private bool _isGrounded;
         private bool _hasPower;
         private float _powerTimer;
-        private LayerMask _whatIsGround;
 
         private void Awake() {
 
             _rb ??= GetComponent<Rigidbody2D>();
         }
 
-        public void Init(LayerMask whatIsGround, CharacterData settings) {
+        public void Init(GameplaySettings settings) {
 
-            _stats = settings;
+            _stats = settings.characterSettings;
+            _settings = settings;
 
             _isAlive = true;
-            _whatIsGround = whatIsGround;
         }
 
         private void Update() {
@@ -74,13 +75,7 @@ namespace Code.Core {
         private void UpdateRotation(ref float rotationInput) {
 
             float rotationAmount = rotationInput * _stats.rotationSpeed * Time.deltaTime;
-            float destRotation = _rb.rotation + rotationAmount;
-            float maxRotationDegree = _stats.maxRotationDegree;
-
-            if ((destRotation >= -maxRotationDegree && destRotation <= maxRotationDegree) || maxRotationDegree >= 180f) {
-
-                _rb.MoveRotation(_rb.rotation + rotationAmount);
-            }
+            _rb.MoveRotation(_rb.rotation + rotationAmount);
         }
 
         private void UpdatePowerUp() {
@@ -104,7 +99,7 @@ namespace Code.Core {
 
         private void CheckGrounded() {
 
-            var hits = Physics2D.RaycastAll(transform.position, -transform.up, 1f, _whatIsGround);
+            var hits = Physics2D.RaycastAll(transform.position, -transform.up, 1f, _settings.whatIsGround);
 
             _isGrounded = false;
             foreach (var hit in hits) {
@@ -121,14 +116,18 @@ namespace Code.Core {
 
         private void OnTriggerEnter2D(Collider2D collision) {
 
-            // Check if the character collides with the power up item
-            // PickUpPower();
+            if (collision.gameObject.layer == _settings.whatIsPowerUp && !_hasPower)
+            {
+                Destroy(collision.gameObject);
+                Debug.Log("powerup picked");
+                PickUpPower();
+            }
         }
 
         private void PickUpPower() {
 
             _hasPower = true;
-            // todo: get the duration of the powerup from the powerup item or by the gameplay controller
+            _powerTimer = _settings.powerUpDurtaionInSeconds;
             GameplayController.Instance.ActivatePowerUp(this);
         }
 
