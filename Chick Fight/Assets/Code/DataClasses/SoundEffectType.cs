@@ -7,5 +7,6 @@
         EggDrop = 3, 
         Jumping = 4,
         PowerUpActivate = 5,
+        Menuclick = 6,
     }
 }
