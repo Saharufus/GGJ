@@ -38,6 +38,8 @@ namespace Code.Core {
 
             Debug.Log($"{characterController} collected powerup "+ powerUp._stats.Count);
             // todo: activate the powerup for a duration on the character and then deactivate
+
+            SoundSystem.Instance.PlaySound(DataClasses.SoundEffectType.PowerUpActivate);
         }
 
         public void Update() {
