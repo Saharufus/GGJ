@@ -122,8 +122,12 @@ namespace Code.Core {
 
         private void OnTriggerEnter2D(Collider2D collision) {
 
-            // Check if the character collides with the power up item
-            // PickUpPower();
+            if (collision.gameObject.layer == 8)
+            {
+                Destroy(collision.gameObject);
+                Debug.Log("powerup picked");
+                PickUpPower();
+            }
         }
 
         private void PickUpPower() {

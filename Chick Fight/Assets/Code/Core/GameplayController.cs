@@ -12,6 +12,7 @@ namespace Code.Core {
         [SerializeField] private List<CharacterController> _characters;
         [SerializeField] private Transform[] _platforms;
         [SerializeField] private Sprite _wormSprite;
+        private float powerupSpawnTimer = 0;
 
         public void SpawnPowerUp()
         {
@@ -26,6 +27,7 @@ namespace Code.Core {
 
             GameObject worm = new GameObject("worm");
             worm.transform.SetPositionAndRotation(spawnPos, platformToSpawnOn.rotation);
+            worm.layer = 8;
             worm.AddComponent<SpriteRenderer>().sprite = _wormSprite;
             worm.AddComponent<CapsuleCollider2D>().isTrigger = true;
         }
@@ -36,9 +38,11 @@ namespace Code.Core {
 
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            powerupSpawnTimer += Time.deltaTime;
+            if (powerupSpawnTimer >= _settings.powerupSpawnTime)
             {
                 SpawnPowerUp();
+                powerupSpawnTimer = 0;
             }
         }
 
