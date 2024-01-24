@@ -1,5 +1,4 @@
-﻿namespace Code.DataClasses
-{
+﻿namespace Code.DataClasses {
 
     public enum PowerUpEffectType {
         None = 0,

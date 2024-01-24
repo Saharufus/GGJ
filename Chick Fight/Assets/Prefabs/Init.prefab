@@ -66,6 +66,7 @@ Transform:
   m_Children:
   - {fileID: 2035349627415702424}
   - {fileID: 7703827770278496889}
+  - {fileID: 9003023164111073736}
   m_Father: {fileID: 3467904784931460752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2261265484216367582
@@ -674,6 +675,37 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!1 &7599045721757601922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9003023164111073736}
+  m_Layer: 0
+  m_Name: SoundSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9003023164111073736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599045721757601922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7240926958617885117}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7845354835722728430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,7 +1164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1235396474400097959, guid: 3040cd2b82f4e1548a5be73e653a21a2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2285225186446344266, guid: 3040cd2b82f4e1548a5be73e653a21a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1172,6 +1204,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2285225186446344266, guid: 3040cd2b82f4e1548a5be73e653a21a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3783096312032156966, guid: 3040cd2b82f4e1548a5be73e653a21a2, type: 3}
+      propertyPath: _leftInput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3783096312032156966, guid: 3040cd2b82f4e1548a5be73e653a21a2, type: 3}
+      propertyPath: _rightInput
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -1254,6 +1294,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4497939507351845710, guid: 16d5d7eadcb9edb4baf504f71e27c22f, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953309364388126222, guid: 16d5d7eadcb9edb4baf504f71e27c22f, type: 3}
+      propertyPath: _leftInput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953309364388126222, guid: 16d5d7eadcb9edb4baf504f71e27c22f, type: 3}
+      propertyPath: _rightInput
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -1296,7 +1344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 299027221632972189, guid: 0936919f020813c43a994a6030dcfdf3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5534198948011239138, guid: 0936919f020813c43a994a6030dcfdf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1336,6 +1384,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5534198948011239138, guid: 0936919f020813c43a994a6030dcfdf3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714891198033945533, guid: 0936919f020813c43a994a6030dcfdf3, type: 3}
+      propertyPath: _leftInput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714891198033945533, guid: 0936919f020813c43a994a6030dcfdf3, type: 3}
+      propertyPath: _rightInput
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
