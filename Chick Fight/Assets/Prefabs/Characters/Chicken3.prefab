@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5534198948011239138}
+  - component: {fileID: 8714891198033945533}
+  - component: {fileID: 2089340048839665444}
   m_Layer: 0
   m_Name: Chicken3
   m_TagString: Untagged
@@ -32,6 +34,49 @@ Transform:
   - {fileID: 8089254529441767089}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8714891198033945533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299027221632972189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4050cba54ba884caf5254088527ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leftInput: 276
+  _rightInput: 275
+  _rb: {fileID: 2089340048839665444}
+  _body: {fileID: 6629603343972292807}
+--- !u!50 &2089340048839665444
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299027221632972189}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: b1cf27226e6aaa14da2f742d268a675c, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &5994387937137453614
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +233,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 910553331113994849, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
+    - {fileID: 1311136424414644504, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 483838241908138067, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
@@ -199,6 +246,11 @@ PrefabInstance:
 --- !u!4 &243681216068573238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 483838241908138067, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
+  m_PrefabInstance: {fileID: 420887103314655333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6629603343972292807 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6473466563195904162, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
   m_PrefabInstance: {fileID: 420887103314655333}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8089254529441767089 stripped

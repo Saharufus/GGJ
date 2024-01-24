@@ -13,5 +13,8 @@ public class GameplaySettings : ScriptableObject {
     [Range(1, 120)] public int powerUpDurtaionInSeconds;
 
     [Header("Character Settings")]
-    public CharacterSettings characterSettings;
+    public CharacterData characterSettings;
+
+    [Header("PowerUp Settings")]
+    public PowerUpsData powerUpSettings;
 }

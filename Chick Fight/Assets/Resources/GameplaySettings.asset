@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   whatIsCharacter:
     serializedVersion: 2
     m_Bits: 128
@@ -25,6 +25,6 @@ MonoBehaviour:
   powerUpDurtaionInSeconds: 5
   characterSettings:
     jumpForce: 7
-    rotationSpeed: 15
+    rotationSpeed: 50
     maxRotationDegree: 45
     jumpXFriction: 0.3
