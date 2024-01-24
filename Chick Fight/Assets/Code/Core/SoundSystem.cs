@@ -4,14 +4,14 @@ using UnityEngine;
 namespace Code.Core {
 
     [DefaultExecutionOrder(2)]
-    [RequireComponent(typeof(AudioSource))]
     public class SoundSystem : Singleton<SoundSystem> {
 
         public static SoundSystem _instance;
 
         [SerializeField] private SoundSettings _settings;
-        
-        private AudioSource audioSource;
+
+        [SerializeField] private AudioSource musicSource;
+        [SerializeField] private AudioSource sfxSource;
 
         private void Awake() {
 
@@ -21,8 +21,6 @@ namespace Code.Core {
             } else {
                 _instance = this;
             }
-
-            audioSource ??= gameObject.AddComponent<AudioSource>();
 
             Init();
         }
@@ -38,6 +36,17 @@ namespace Code.Core {
             Debug.Log($"Loaded Sound Effects {_settings.effects.Count}");
         }
 
+        public void PlayMusic(MusicType musicToPlay) {
+
+            var musicClip = musicToPlay == MusicType.Menu ? _settings.menuMusic : musicToPlay == MusicType.Game ? _settings.gameMusic : null;
+
+            if (musicClip == null) {
+                return;
+            }
+
+            musicSource.PlayOneShot(musicClip);
+        }
+
         public void PlaySound(SoundEffectType soundToPlay) { 
             
             foreach(var sfx in _settings.effects) { 
@@ -46,12 +55,12 @@ namespace Code.Core {
                     continue;
                 }
 
-                audioSource.PlayOneShot(sfx.variations[Random.Range(0, sfx.variations.Length)]);
+                sfxSource.PlayOneShot(sfx.variations[Random.Range(0, sfx.variations.Length)]);
             }
         }
 
         [ContextMenu("Play Random")]
-        public void PlayRandomSound(SoundEffectType soundToPlay) {
+        public void PlayRandomSound() {
 
             var randomizedSound = Random.Range(0, _settings.effects.Count);
             PlaySound(_settings.effects[randomizedSound].effect);

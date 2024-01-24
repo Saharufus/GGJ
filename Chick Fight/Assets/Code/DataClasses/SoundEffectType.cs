@@ -1,5 +1,5 @@
 ﻿namespace Code.DataClasses {
-    
+
     public enum SoundEffectType {
         RoastedByFire = 0,
         HitBetweenCharacters = 1,

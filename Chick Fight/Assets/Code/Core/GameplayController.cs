@@ -29,7 +29,7 @@ namespace Code.Core {
             GameObject worm = new GameObject("worm");
             worm.transform.parent = transform.Find("Components/PowerUps");
             worm.transform.SetPositionAndRotation(spawnPos, platformToSpawnOn.rotation);
-            worm.layer = (int)Mathf.Log(_powerupLayer.value, 2);
+            worm.layer = _settings.whatIsPowerUp;
             worm.AddComponent<SpriteRenderer>().sprite = _wormSprite;
             worm.AddComponent<CapsuleCollider2D>().isTrigger = true;
         }
@@ -42,7 +42,7 @@ namespace Code.Core {
             powerupSpawnTimer += Time.deltaTime;
             if (powerupSpawnTimer >= _settings.powerupSpawnTime)
             {
-                SpawnPowerUp();
+                //SpawnPowerUp();
                 powerupSpawnTimer = 0;
             }
         }
