@@ -112,8 +112,15 @@ namespace Code.Core {
                     Debug.Log($"GameplayController has missing character ref {character.gameObject.name}");
                     continue;
                 }
+                
                 character.Activate(true);
             }
+        }
+
+        public void PlayerOffScreen(CharacterController character) {
+
+            character.Activate(false);
+            SoundSystem.Instance.PlaySound(DataClasses.SoundEffectType.FallOffScreen);
         }
     }
 }

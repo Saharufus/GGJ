@@ -153,9 +153,18 @@ namespace Code.Core {
         }
 
         public void Activate(bool isActive) {
+            
+            if (isActive) {
+                gameObject.SetActive(true);
+            }
 
             _active = isActive;
+            
             _rb.simulated = _active;
+            
+            if (!isActive) {
+                gameObject.SetActive(true);
+            }
         }
     }
 }
