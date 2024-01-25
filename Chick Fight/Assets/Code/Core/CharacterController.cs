@@ -11,10 +11,13 @@ namespace Code.Core {
 
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Transform _body;
+        [SerializeField] private Transform _characterModel;
 
         private CharacterData _stats;
         private GameplaySettings _settings;
 
+        private Vector3 _faceLeft;
+        private Vector3 _faceRight;
         private bool _active;
         private bool _isAlive;
         private bool _isGrounded;
@@ -30,6 +33,9 @@ namespace Code.Core {
 
             _stats = settings.characterSettings;
             _settings = settings;
+
+            _faceRight = Vector3.one;
+            _faceLeft = new Vector3(-1, 1, 1);
 
             _isAlive = true;
             Activate(false);
@@ -87,6 +93,14 @@ namespace Code.Core {
 
             float rotationAmount = rotationInput * _stats.rotationSpeed * Time.deltaTime;
             _rb.MoveRotation(_rb.rotation + rotationAmount);
+            var realRotation = (Mathf.Abs(_rb.rotation) +90) % 180;
+
+            if (realRotation < 90) {
+                _characterModel.transform.localScale = _faceRight;
+            
+            } else if (realRotation > 90) {
+                _characterModel.transform.localScale = _faceLeft;
+            }
         }
 
         private void UpdatePowerUp() {
@@ -106,6 +120,7 @@ namespace Code.Core {
             Vector2 jumpVelocity = transform.up * _stats.jumpForce;
             _rb.velocity = new Vector2(_rb.velocity.x / (_stats.jumpXFriction + 1), 0) + jumpVelocity;
             _rb.angularVelocity = 0;
+            SoundSystem.Instance.PlaySound(SoundEffectType.Jumping);
         }
 
         private void CheckGrounded() {
@@ -129,9 +144,8 @@ namespace Code.Core {
 
             if (!_hasPower) {
 
-                var powerUpCollider = collision.gameObject.GetComponent<PowerUp>();
-                PickUpPower(powerUpCollider);
-                Destroy(collision.gameObject);
+                var powerUp = collision.gameObject.GetComponent<PowerUp>();
+                PickUpPower(powerUp);
             }
         }
 
@@ -161,10 +175,17 @@ namespace Code.Core {
             _active = isActive;
             
             _rb.simulated = _active;
-            
+            _rb.velocity = Vector2.zero;
+            transform.rotation = Quaternion.identity;
+
             if (!isActive) {
-                gameObject.SetActive(true);
+                gameObject.SetActive(false);
             }
+        }
+
+        public void SetPosition(Vector2 newPos) {
+            
+            gameObject.transform.position = newPos;
         }
     }
 }

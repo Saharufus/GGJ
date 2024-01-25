@@ -40,12 +40,16 @@ namespace Code.Core {
 
             var musicClip = musicToPlay == MusicType.Menu ? _settings.menuMusic : musicToPlay == MusicType.Game ? _settings.gameMusic : null;
 
-            if (musicClip == null) {
+            if (musicClip == null || musicClip == musicSource.clip) {
                 return;
             }
 
+            if (musicSource.clip != null) {
+                musicSource.Stop();
+            }
+
             musicSource.clip = musicClip;
-            musicSource.PlayOneShot(musicClip);
+            musicSource.Play();
         }
 
         public void PlaySound(SoundEffectType soundToPlay) { 

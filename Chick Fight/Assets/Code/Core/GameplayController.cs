@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Code.Core {
@@ -9,12 +8,22 @@ namespace Code.Core {
 
         public static GameplayController _instance;
 
+        [Header("Settings")]
         [SerializeField] private GameplaySettings _settings;
+
+        [Header("UI Screens")]
+        [SerializeField] private Transform _menu;
+        [SerializeField] private Transform _startGame;
+        [SerializeField] private Transform _endGame;
+
+        [Header("Game")]
         [SerializeField] private List<CharacterController> _characters;
+        [SerializeField] private Transform[] _spawnZones;
         [SerializeField] private Transform[] _platforms;
         [SerializeField] private Transform _powerUpTransform;
         [SerializeField] private PowerUp _powerUp;
 
+        private List<CharacterController> _aliveCharacters = new();
         private float powerupSpawnTimer = 0;
 
         public void SpawnPowerUp() {
@@ -28,7 +37,7 @@ namespace Code.Core {
             float spawnYPos = platformToSpawnOn.localScale.y * platformSprite.sprite.bounds.extents.y;
             Vector2 spawnPos = platformToSpawnOn.position + platformToSpawnOn.TransformDirection(new Vector2(spawnXPos, spawnYPos));
 
-            var worm = Instantiate(_powerUp, _powerUpTransform.parent);
+            var worm = Instantiate(_powerUp, _powerUpTransform);
             var powerUpEffects = Random.Range(0, _settings.powerUpSettings.powerUps.Count);
             worm.Init(_settings.powerUpSettings.powerUps[powerUpEffects]);
             worm.transform.SetPositionAndRotation(spawnPos, platformToSpawnOn.rotation);
@@ -40,9 +49,23 @@ namespace Code.Core {
             // todo: activate the powerup for a duration on the character and then deactivate
 
             SoundSystem.Instance.PlaySound(DataClasses.SoundEffectType.PowerUpActivate);
+
+            Destroy(powerUp.gameObject);
+        }
+
+        public void CleanPowerUps() {
+
+            var powerUps = _powerUpTransform;
+            foreach (Transform powerup in powerUps) {
+                DestroyImmediate(powerup.gameObject);
+            }
+
         }
 
         public void Update() {
+
+            var gameIsRunning = _aliveCharacters.Count > 1;
+            if (!gameIsRunning) { return; }
 
             powerupSpawnTimer += Time.deltaTime;
             if (powerupSpawnTimer >= _settings.powerupSpawnTime) {
@@ -61,10 +84,28 @@ namespace Code.Core {
             }
 
             Init();
+            GoToMenu();
+        }
+
+        public void GoToMenu() {
+
+            SwitchUIScreen(_menu);
+            SoundSystem.Instance.PlayMusic(DataClasses.MusicType.Menu);
         }
 
         public void StartGame() {
+
+            CleanPowerUps();
             ActivateCharacters();
+            SwitchUIScreen(_startGame);
+            SoundSystem.Instance.PlayMusic(DataClasses.MusicType.Game);
+        }
+
+        private void SwitchUIScreen(Transform screenToDisplay) {
+
+            _menu.gameObject.SetActive(_menu == screenToDisplay);
+            _startGame.gameObject.SetActive(_startGame == screenToDisplay);
+            _endGame.gameObject.SetActive(_endGame == screenToDisplay);
         }
 
         private void Init() {
@@ -78,8 +119,6 @@ namespace Code.Core {
                 Debug.LogError("Missing ref to Characters");
                 return;
             }
-
-            SoundSystem.Instance.PlayMusic(DataClasses.MusicType.Menu);
 
             InitCharacters();
         }
@@ -106,6 +145,9 @@ namespace Code.Core {
                 return;
             }
 
+            _aliveCharacters = new List<CharacterController>();
+            var randomPos = new List<Transform>(_spawnZones);
+
             foreach (CharacterController character in _characters) {
 
                 if (character == null) {
@@ -114,13 +156,28 @@ namespace Code.Core {
                 }
                 
                 character.Activate(true);
+                _aliveCharacters.Add(character);
+
+                var randomSpawn = Random.Range(0, randomPos.Count);
+                character.SetPosition(randomPos[randomSpawn].position);
+                randomPos.RemoveAt(randomSpawn);
             }
         }
 
         public void PlayerOffScreen(CharacterController character) {
 
+            _aliveCharacters.Remove(character);
             character.Activate(false);
             SoundSystem.Instance.PlaySound(DataClasses.SoundEffectType.FallOffScreen);
+
+            CheckGameFinished();
+        }
+
+        private void CheckGameFinished() {
+            
+            if (_aliveCharacters.Count < 2) {
+                SwitchUIScreen(_endGame);
+            }
         }
     }
 }

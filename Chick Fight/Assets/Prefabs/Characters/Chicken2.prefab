@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4050cba54ba884caf5254088527ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftInput: 276
-  _rightInput: 275
+  _leftInput: 97
+  _rightInput: 100
   _rb: {fileID: 6367592947043053126}
   _body: {fileID: 899225325129927750}
+  _characterModel: {fileID: 5988133224203783351}
 --- !u!50 &6367592947043053126
 Rigidbody2D:
   serializedVersion: 4
@@ -192,5 +193,10 @@ Transform:
 --- !u!4 &2322005367481616944 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8472824190893057748, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
+  m_PrefabInstance: {fileID: 6173572117079960804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5988133224203783351 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 483838241908138067, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
   m_PrefabInstance: {fileID: 6173572117079960804}
   m_PrefabAsset: {fileID: 0}

@@ -420,9 +420,7 @@ MonoBehaviour:
   _rightInput: 0
   _rb: {fileID: 1311136424414644504}
   _body: {fileID: 6473466563195904162}
-  _powerupLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  _characterModel: {fileID: 0}
 --- !u!50 &1311136424414644504
 Rigidbody2D:
   serializedVersion: 4
@@ -579,6 +577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6473466563195904162}
   - component: {fileID: 3583110494906484418}
+  - component: {fileID: 7361014869808062564}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -636,3 +635,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.35
+--- !u!114 &7361014869808062564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550774345075512068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db9866982468be479dd6efc41b1ab44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  sound: 1

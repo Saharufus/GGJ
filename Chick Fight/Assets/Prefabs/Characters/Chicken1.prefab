@@ -50,6 +50,7 @@ MonoBehaviour:
   _rightInput: 275
   _rb: {fileID: 6554628982310065029}
   _body: {fileID: 8707702212261060525}
+  _characterModel: {fileID: 2861851595651555164}
 --- !u!50 &6554628982310065029
 Rigidbody2D:
   serializedVersion: 4
@@ -180,6 +181,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
+--- !u!4 &2861851595651555164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 483838241908138067, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}
+  m_PrefabInstance: {fileID: 2378365199647063823}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6094533826793003483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8472824190893057748, guid: 9d180ce319276dd48a691d9b53b2a45e, type: 3}

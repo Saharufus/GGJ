@@ -11,8 +11,7 @@ namespace Code.Core {
         public void Init(PowerUpData data) {
 
             _stats = data.effects;
-
-            Destroy(gameObject, Time.time + data.durationInSeconds);
         }
     }
+    
 }
