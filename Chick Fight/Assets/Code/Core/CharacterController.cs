@@ -93,7 +93,7 @@ namespace Code.Core {
 
             float rotationAmount = rotationInput * _stats.rotationSpeed * Time.deltaTime;
             _rb.MoveRotation(_rb.rotation + rotationAmount);
-            var realRotation = (Mathf.Abs(_rb.rotation)+180) % 360;
+            var realRotation = (_rb.rotation+360) % 360;
 
             if (realRotation > 180) {
                 _characterModel.transform.localScale = _faceRight;

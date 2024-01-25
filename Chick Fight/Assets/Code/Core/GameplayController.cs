@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace Code.Core {
@@ -15,6 +17,7 @@ namespace Code.Core {
         [SerializeField] private Transform _menu;
         [SerializeField] private Transform _startGame;
         [SerializeField] private Transform _endGame;
+        [SerializeField] private TextMeshProUGUI _endGameWinner;
 
         [Header("Game")]
         [SerializeField] private List<CharacterController> _characters;
@@ -177,6 +180,7 @@ namespace Code.Core {
             
             if (_aliveCharacters.Count < 2) {
                 SwitchUIScreen(_endGame);
+                _endGameWinner.text = _aliveCharacters.FirstOrDefault().name;
             }
         }
     }
